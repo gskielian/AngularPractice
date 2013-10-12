@@ -1,13 +1,34 @@
-<html>
+<html ng-app="myapp">
   <head>
-  <!-- adds angular js-->
+    <!-- adds angular js-->
     <script src="https://cndjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js">  </script>
-  <!-- adds firebase -->
+
+    <!-- adds firebase -->
     <script src="https://cnd.firebase.com/v0/firebase.js"></script>
-  <!-- adds angularfire bindings-->
+ 
+    <!-- adds angularfire bindings-->
     <script src="https://cnd.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
   </head>
   <body>
+ <input ng-model="messages" type="text">
+ {{messages}}
+    <script>
+    var app = angular.module("myapp",["firebase"]);
+    
+    //controller is where all the math and processing occurs -- i.e. preferably not in the html
+    function MyController($scope, angularFire) {
 
+      // the following is your url for your firebase -- the place where all json files live
+      var ref = new Firebase("https://wf9adjig32n.firebaseio-demo.com/");
+
+      // literally looks for variable called "messages" in the controller's scope (between the tags it was included into) 
+      $scope.messages = [];
+
+    //binding -- the special way to bind the angular model to the database's model
+    angularFire(ref, $scope, "messages");
+
+
+    }
+    </script>
   </body>
 </html>
