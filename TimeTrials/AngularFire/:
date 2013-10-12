@@ -1,21 +1,16 @@
 <html ng-app="myapp">
   <head>
     <!-- adds angular js-->
-    <script src="./angular.min.js">  </script>
+    <script src="https://cndjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js">  </script>
 
     <!-- adds firebase -->
-    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+    <script src="https://cnd.firebase.com/v0/firebase.js"></script>
 
     <!-- adds angularfire bindings-->
-    <script src="angularfire.min.js"></script>
-
+    <script src="https://cnd.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
   </head>
-
   <body>
-
-
-
- <input ng-model="messages" type="text">
+  <input ng-model="messages" type="text">
  {{messages}}
     <script>
     var app = angular.module("myapp",["firebase"]);
