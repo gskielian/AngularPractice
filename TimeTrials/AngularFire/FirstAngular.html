@@ -1,24 +1,24 @@
+<!doctype html>
 <html ng-app="myapp">
   <head>
     
     <!-- adds angular js-->
     <script src="./angular.min.js">  </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.min.js"></script>
    
     <!-- adds firebase -->
-    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+    <script type='text/javascript' src='firebase.js'></script>
 
     <!-- adds angularfire bindings-->
     <script src="angularfire.min.js"></script>
 
   </head>
-
-  <body>
-
-
-  <!-- binding of messages with page output-->
- <input ng-model="messages" type="text">
- {{messages}}
+<body ng-controller="MyController">
+<div id="messagesDiv">
+<div ng-repeat="msg in messages"><em>{{msg.from}}</em>: {{msg.body}}</div>
+</div>
+<input type="text" ng-model="name" placeholder="Name">
+<input type="text" ng-model="msg" ng-keydown="addMessage($event)" placeholder="Message...">
+ {{msg}},{{name}}
 
 
     <script>
@@ -31,7 +31,8 @@
     function MyController($scope, angularFire) {
 
       // the following is your url for your firebase -- the place where all json files live
-      var ref = new Firebase("https://kielian.firebaseio.com/");
+      //^^^this one got me, make sure to include a directory -- in this case "happy" else it won't work ^^^ 
+      var ref = new Firebase("https://kielian.firebaseio.com/happy");
 
       // literally looks for variable called "messages" in the controller's scope (between the tags it was included into) 
       $scope.messages = [];
@@ -40,6 +41,14 @@
     angularFire(ref, $scope, "messages");
 
 
+    //FINALLY, writing data to firebase
+
+    //We define a function in order to bind data directly to the firebase
+    $scope.addMessage = function(e) {
+      if(e.keyCode != 13) return; // only proceed to next lines if enter key is pressed
+       $scope.messages.push({from: $scope.name, body: $scope.msg});
+       $scope.msg = ""; // this clears the view's msg variable
+    }
     }
     </script>
   </body>
