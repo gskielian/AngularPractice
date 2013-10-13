@@ -1,8 +1,10 @@
 <html ng-app="myapp">
   <head>
+    
     <!-- adds angular js-->
     <script src="./angular.min.js">  </script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.min.js"></script>
+   
     <!-- adds firebase -->
     <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
 
@@ -14,17 +16,22 @@
   <body>
 
 
-
+  <!-- binding of messages with page output-->
  <input ng-model="messages" type="text">
  {{messages}}
+
+
     <script>
+   //app determines the scope of your functions
     var app = angular.module("myapp",["firebase"]);
+
+
 
     //controller is where all the math and processing occurs -- i.e. preferably not in the html
     function MyController($scope, angularFire) {
 
       // the following is your url for your firebase -- the place where all json files live
-      var ref = new Firebase("https://wf9adjig32n.firebaseio-demo.com/");
+      var ref = new Firebase("https://kielian.firebaseio.com/");
 
       // literally looks for variable called "messages" in the controller's scope (between the tags it was included into) 
       $scope.messages = [];
