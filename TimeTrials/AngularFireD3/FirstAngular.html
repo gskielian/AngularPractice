@@ -1,6 +1,20 @@
+<body ng-controller="MainCtrl">
+  <div style='height: 500px;'>
+    <linechart data='data' options='options'></linechart>
+  </div>
+</body>
+</html>
+
+
+
 <!doctype html>
 <html ng-app="myapp">
   <head>
+  
+    <meta charset="utf-8">
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="app.js"></script>
+  
     
     <!-- adds angular js-->
     <script src="./angular.min.js">  </script>
@@ -10,9 +24,18 @@
 
     <!-- adds angularfire bindings-->
     <script src="angularfire.min.js"></script>
-
+    
+    <!-- line-chart directive -->
+    <script src="line-chart.min.js"></script>
+  
   </head>
-<body ng-controller="MyController">
+<body ng-controller="MainCtrl">
+  <div style='height: 500px;'>
+    <linechart data='data' options='options'></linechart>
+  </div>
+
+
+
 <div id="messagesDiv">
 <div ng-repeat="msg in messages"><em>{{msg.from}}</em>: {{msg.body}}</div>
 </div>
@@ -23,7 +46,7 @@
 
     <script>
    //app determines the scope of your functions
-    var app = angular.module("myapp",["firebase"]);
+    var app = angular.module("plunkr",["firebase"]);
 
 
 
