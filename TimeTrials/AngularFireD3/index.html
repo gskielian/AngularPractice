@@ -1,0 +1,19 @@
+<!doctype html>
+<html ng-app="plunker" >
+<head>
+  <meta charset="utf-8">
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="http://code.angularjs.org/1.1.4/angular.js"></script>
+  <script src="app.js"></script>
+  
+  <!-- line-chart directive -->
+  <script src="line-chart.min.js"></script>
+  
+  
+</head>
+<body ng-controller="MainCtrl">
+  <div style='height: 500px;'>
+    <linechart data='data' options='options'></linechart>
+  </div>
+</body>
+</html>
