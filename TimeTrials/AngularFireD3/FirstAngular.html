@@ -1,5 +1,4 @@
 
-
 <!doctype html>
 <html ng-app="myapp">
   <head>
@@ -24,6 +23,7 @@
   </head>
 <body ng-controller="MainCtrl">
   <div style='height: 500px;'>
+      <input type="number" ng-model="dasthing" ng-change="change()">
     <linechart data='data' options='options'></linechart>
   </div>
 
