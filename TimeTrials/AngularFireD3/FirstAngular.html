@@ -4,12 +4,12 @@
   
     <meta charset="utf-8">
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <script src="app.js"></script>
   
     
     <!-- adds angular js-->
     <script src="./angular.min.js">  </script>
    
+  <script src="anapp.js"></script>
     <!-- adds firebase -->
     <script type='text/javascript' src='firebase.js'></script>
 
@@ -20,9 +20,9 @@
     <script src="line-chart.min.js"></script>
   
   </head>
-<body ng-controller="MainCtrl">
+<body ng-controller="MyController">
   <div style='height: 500px;'>
-    <linechart data='data' options='options'></linechart>
+    <linechart data='messages' options='options'></linechart>
       <input type="number" ng-model="dasthing" ng-change="change()">
 
   </div>
@@ -30,78 +30,14 @@
 
 <div ng-controller="MyController">
 <div id="messagesDiv">
-<div ng-repeat="msg in messages"><em>{{msg.from}}</em>: {{msg.body}}</div>
+<div ng-repeat="msg in messages"><em>{{msg.x}}</em>: {{msg.value}}</div>
 </div>
-<input type="text" ng-model="name" placeholder="Name">
-<input type="text" ng-model="msg" ng-keydown="addMessage($event)" placeholder="Message...">
- {{msg}},{{name}}
+<input type="text" ng-model="x" placeholder="Name">
+<input type="text" ng-model="value" ng-keydown="addMessage($event)" placeholder="Message...">
+ {{x}},{{value}}
  </div>
 
 
 
-    <script>
-
-
-   //app determines the scope of your functions
-var app = angular.module('myapp', ['n3-charts.linechart','firebase']);
-
-
-
-
-
-
-
-app.controller('MainCtrl', function($scope) {
-
-  $scope.dasthing =0;
-  $scope.data = [{x: 0, value: $scope.dasthing}, {x: 1, value: 4}, {x: 2, value: 7}, {x: 3, value: 0}];
-  
-  
-  
-  // Line
-  //$scope.options = {series: [{y: 'value', color: 'steelblue'}]};
-  
-  // Area
-  //$scope.options = {series: [{y: 'value', tyep: 'area', color: 'steelblue'}]};
-  
-  // Column
-  //$scope.options = {series: [{y: 'value', type: 'column', color: 'steelblue'}]};
-  
-  // Interpolation
-  $scope.options = {lineMode: 'cardinal', series: [{y: 'value', color: 'steelblue'}]};
-  
-  $scope.change = function() {
-  $scope.data = [{x: 0, value: $scope.dasthing}, {x: 1, value: 4}, {x: 2, value: 7}, {x: 3, value: 0}];
-    
-  }
-  
-});
-
-
-
-    //controller is where all the math and processing occurs -- i.e. preferably not in the html
-    function MyController($scope, angularFire) {
-
-      // the following is your url for your firebase -- the place where all json files live
-      //^^^this one got me, make sure to include a directory -- in this case "happy" else it won't work ^^^ 
-      var ref = new Firebase("https://kielian.firebaseio.com/happy");
-
-      // literally looks for variable called "messages" in the controller's scope (between the tags it was included into) 
-      $scope.messages = [];
-
-    //binding -- the special way to bind the angular model to the database's model
-    angularFire(ref, $scope, "messages");
-
-
-    //FINALLY, writing data to firebase
-
-    //We define a function in order to bind data directly to the firebase
-    $scope.addMessage = function(e) {
-      if(e.keyCode != 13) return; // only proceed to next lines if enter key is pressed
-       $scope.messages.push({from: $scope.name, body: $scope.msg});
-       $scope.msg = ""; // this clears the view's msg variable
-    }
-    }
-    </script>
   </body>
 </html>
