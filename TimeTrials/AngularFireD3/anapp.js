@@ -23,9 +23,9 @@ app.controller('MyController', function($scope,angularFire) {
   // Area
   //$scope.options = {series: [{y: 'value', tyep: 'area', color: 'steelblue'}]};
   
+  
   // Column
   //$scope.options = {series: [{y: 'value', type: 'column', color: 'steelblue'}]};
-  
   // Interpolation
   $scope.options = {lineMode: 'cardinal', series: [{y: 'value', color: 'steelblue'}]};
   
@@ -49,11 +49,17 @@ app.controller('MyController', function($scope,angularFire) {
        $scope.messages.push({x: $scope.x, value: $scope.value});
        $scope.msg = ""; // this clears the view's msg variable
     }
+    $scope.clearMessage = function() {
+	//it's better to use firebase's removing as opposed to angular's
+	//this makes it sure to reach the firebase
+	ref.remove()
+	}
   $scope.change = function() {
 //  $scope.data = [{x: 0, value: $scope.dasthing}, {x: 1, value: 4}, {x: 2, value: 7}, {x: 3, value: 0}];
     
   }
-  
+
+
 });
 
 
