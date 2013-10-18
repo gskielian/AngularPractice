@@ -48,16 +48,19 @@ app.controller('MyController', function($scope,angularFire) {
       if(e.keyCode != 13) return; // only proceed to next lines if enter key is pressed
        $scope.messages.push({x: $scope.x, value: $scope.value});
        $scope.msg = ""; // this clears the view's msg variable
-    }
+    };
+    ref.on('child_added', function(snapshot) {
+        $scope.messages  = snapshot.val();
+          });
     $scope.clearMessage = function() {
 	//it's better to use firebase's removing as opposed to angular's
 	//this makes it sure to reach the firebase
-	ref.remove()
-	}
+	ref.remove();
+	};
   $scope.change = function() {
 //  $scope.data = [{x: 0, value: $scope.dasthing}, {x: 1, value: 4}, {x: 2, value: 7}, {x: 3, value: 0}];
     
-  }
+  };
 
 
 });
