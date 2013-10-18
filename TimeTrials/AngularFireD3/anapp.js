@@ -1,6 +1,5 @@
 
 
-
    //app determines the scope of your functions
 var app = angular.module('myapp', ['n3-charts.linechart','firebase']);
 
@@ -49,9 +48,7 @@ app.controller('MyController', function($scope,angularFire) {
        $scope.messages.push({x: $scope.x, value: $scope.value});
        $scope.msg = ""; // this clears the view's msg variable
     };
-    ref.on('child_added', function(snapshot) {
-        $scope.messages  = snapshot.val();
-          });
+
     $scope.clearMessage = function() {
 	//it's better to use firebase's removing as opposed to angular's
 	//this makes it sure to reach the firebase
