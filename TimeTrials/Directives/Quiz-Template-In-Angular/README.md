@@ -51,3 +51,13 @@ Homework-Generator
 Actual homework which can be assigned with randomized numbers.  Will open-source.
 
 
+
+
+
+Animations
+==========
+
+need to include slot machine type effect for points, would be super cool
+
+also the odometer one from github would be good too...
+
