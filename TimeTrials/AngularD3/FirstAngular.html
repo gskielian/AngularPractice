@@ -1,0 +1,84 @@
+<!doctype html>
+<html ng-app="myapp">
+  <head>
+
+    <!-- adds d3 -->
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    
+    <!-- adds angular js-->
+    <script src="./angular.min.js">  </script>
+   
+    <!-- adds firebase -->
+    <script type='text/javascript' src='firebase.js'></script>
+
+    <!-- adds angularfire bindings-->
+    <script src="angularfire.min.js"></script>
+
+
+    <!-- adds angular app bindings -->
+    <script src="app.js"></script>
+
+    <!-- line-chart directives -->
+
+    <script src="line-chart.min.js"></script>
+
+
+  </head>
+<body ng-controller="MyController">
+<div style="height:600pxl">
+  <linechart data='data' options='options'></linechart>
+</div>
+
+<div id="messagesDiv">
+<div ng-repeat="dat in data"><em>{{dat.x}}</em>: {{dat.value}}</div>
+</div>
+<input type="text" ng-model="number" placeholder="Name">
+<input type="text" ng-model="value" ng-keydown="addMessage($event)" placeholder="Message...">
+ {{msg}},{{name}}
+
+
+    <script>
+   //app determines the scope of your functions
+    var app = angular.module("myapp",["n3-charts.linechart","firebase"]);
+
+
+
+    //controller is where all the math and processing occurs -- i.e. preferably not in the html
+    function MyController($scope, angularFire) {
+
+
+  // Line
+  //$scope.options = {series: [{y: 'value', color: 'steelblue'}]};
+  
+  // Area
+  //$scope.options = {series: [{y: 'value', type: 'area', color: 'steelblue'}]};
+  
+  // Column
+ // $scope.options = {series: [{y: 'value', type: 'column', color: 'steelblue'}]};
+  
+  // Interpolation
+  $scope.options = {lineMode: 'cardinal', series: [{y: 'value', color: 'steelblue'}]};
+  
+      // the following is your url for your firebase -- the place where all json files live
+      //^^^this one got me, make sure to include a directory -- in this case "happy" else it won't work ^^^ 
+      var ref = new Firebase("https://kielian.firebaseio.com/linechart");
+
+      // literally looks for variable called "messages" in the controller's scope (between the tags it was included into) 
+      $scope.data = [];
+
+    //binding -- the special way to bind the angular model to the database's model
+    angularFire(ref, $scope, "data");
+
+
+    //FINALLY, writing data to firebase
+
+    //We define a function in order to bind data directly to the firebase
+    $scope.addMessage = function(e) {
+      if(e.keyCode != 13) return; // only proceed to next lines if enter key is pressed
+       $scope.data.push({x: $scope.number, value: $scope.value});
+       $scope.msg = ""; // this clears the view's msg variable
+    }
+    }
+    </script>
+  </body>
+</html>
