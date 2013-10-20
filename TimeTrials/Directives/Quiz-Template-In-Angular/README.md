@@ -28,7 +28,8 @@ Before and after lab, students will test their understanding and view progress w
 
 For my upcoming mechanics section this will include:
 
-1. aiming a cannon ball (three.js and html5 canvas implementations)
+1. aiming a cannon ball (three.js and html5 canvas implementations) -- at different targets, three.js collisiondetect
+  *getting 10 right grants you fluffy cat ball, planet, perhaps different actions (cows fall from the sky or someting).
 2. guessing when the ball will hit the ground (three.js canvas and Date.time() method)
 3. visualizing the vectors of angular momentum
 4. Visualizing Free body diagrams
