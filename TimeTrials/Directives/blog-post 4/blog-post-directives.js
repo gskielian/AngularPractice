@@ -11,16 +11,6 @@ app.directive("greybig",function() {
     template: "<div>{{content}}</div>"
   };
 });
-app.directive("lead",function() {
-  return {
-    restrict:"EA",
-    scope: {
-      content:"@"
-    },
-    template: "<p class=\"lead\">{{content}}</div>"
-  };
-});
-
 app.directive("navbar",function() {
   return {
     restrict:"EA",
@@ -31,3 +21,12 @@ app.directive("navbar",function() {
   };
 });
 
+app.directive("posttime",function() {
+  return{
+    restrict: "EA",
+    scope: {
+      dastime:"@"
+    },
+    template: " <p><span class=\"glyphicon glyphicon-time\"></span> Posted on {{dastime}}</p>"
+  };
+});

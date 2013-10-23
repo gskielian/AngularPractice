@@ -1,0 +1,29 @@
+<p class="lead">"It's not the daily increase but daily decrease. Hack away at the unessential." -- Bruce Lee</p> <p class="lead"> Angular Directives allow simplifying view structuring, decreasing wasted keystrokes and potential errors, as well as extensibility for transitioning the model into the view.  In this first day of implementing Angular where I use to assist simplify the html-view.</p>
+          
+          <p>Angular has gotten a lot of buzz lately being rumored to greatly reduce the lines of code required to make any site. Here I'll share my perspective on using it for reducing clutter in the view of this boostrap-based-blog.</p>
+
+          <p>Basically, I used a lot of <strong>ng-include</strong> and directives.  Those familiar with php recall the way which <strong>require</strong> worked to include static blocks of code and simplify generation. This <strong>ng-include</strong> works in almost the same way with a crazy caveat: you will need to place extra tick marks '' around the html in order for it to work (trust me you need to include the extra ''). </p>
+          <p> For example, the following line were used to bring in the content of this blog-entry:</p>
+<pre style="background:#000;color:#f8f8f8"> <span style="color:#89bdff">&lt;<span style="color:#89bdff">div</span> <span style="color:#89bdff">ng-include</span> <span style="color:#89bdff">src</span>=<span style="color:#65b042">"'001_helloblog.html'"</span>>&lt;/<span style="color:#89bdff">div</span>></span>
+</pre>
+          <p>Directives are another story.  They are great for hiding away the usual html (also keeping it safe from stray keystrokes), while allowing us to access the key bits.  Possibly not the best example, but here is how I am hiding away html code from my date time section:</p>
+<pre style="background:#000;color:#f8f8f8">
+
+app.directive(<span style="color:#65b042">"posttime"</span>,function() {
+  <span style="color:#e28964">return</span>{
+    restrict: <span style="color:#65b042">"EA"</span>,
+    scope: {
+      dastime:<span style="color:#65b042">"@"</span>
+    },
+    template: <span style="color:#65b042">" &lt;p>&lt;span class=<span style="color:#ddf2a4">\"</span>glyphicon glyphicon-time<span style="color:#ddf2a4">\"</span>>&lt;/span> Posted on {{dastime}}&lt;/p>"</span>
+  };
+});
+
+</pre>
+          <p>Including the custom html tag was simple and now looks like:</p>
+          <pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">posttime</span> <span style="color:#89bdff">dastime</span>=<span style="color:#65b042">" Tue Oct 22 20:15:22 PDT 2013 "</span>>&lt;/<span style="color:#89bdff">posttime</span>></span> </pre>
+
+          <p>as opposed to:</p>
+          <pre style="background:#000;color:#f8f8f8"><span style="color:#89bdff">&lt;<span style="color:#89bdff">p</span>></span><span style="color:#89bdff">&lt;<span style="color:#89bdff">span</span> <span style="color:#89bdff">class</span>=<span style="color:#65b042">"glyphicon glyphicon-time"</span>>&lt;/<span style="color:#89bdff">span</span>></span> Posted on August 24, 2013 at 9:00 PM<span style="color:#89bdff">&lt;/<span style="color:#89bdff">p</span>></span> </pre>
+          <p> Not tremendous gains, but one can easily image for places where dense code has only one value (navbars) which needs to be flipped to active (like tabs) this ability of directives can really be useful.</p>
+
