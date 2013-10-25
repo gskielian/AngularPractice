@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html ng-app="myapp">
   <head>
 
@@ -9,7 +9,7 @@
     <!-- adds angular js-->
     <script src="./angular.min.js">  </script>
 
-  <script src="anapp.js"></script>
+  <script src="robot.js"></script>
     <!-- adds firebase -->
     <script type='text/javascript' src='firebase.js'></script>
 
@@ -28,13 +28,20 @@
 
 
 <div ng-controller="MyController">
-<input type="text" ng-model="x" placeholder="Name">
-<input type="text" ng-model="value" ng-keydown="addMessage($event)" placeholder="Message...">
- {{x}},{{value}}
-<input type="button" ng-click="clearMessage()"  value="clear graph"> 
+
+<input type="button" ng-click="addMessage(1)"  value="Move Forward"> 
+<br>
+<input type="button" ng-click="addMessage(2)"  value="Move Left"> 
+<input type="button" ng-click="addMessage(3)"  value="Move Backwards"> 
+<input type="button" ng-click="addMessage(4)"  value="Move Right"> 
+
 
 <div id="messagesDiv"> <div ng-repeat="msg in messages"><em>{{msg.x}}</em>: {{msg.value}}</div>
 </div>
+
+
+
+
  </div>
 
 
